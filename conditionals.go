@@ -5,11 +5,7 @@ import (
 	"time"
 )
 
-func main() {
-	if test := true; test {
-		fmt.Println("Hello If")
-	}
-
+func variableSwitch() {
 	switch hour := time.Now().Hour(); {
 	case hour < 12:
 		fmt.Println("Good morning!")
@@ -18,7 +14,9 @@ func main() {
 	default:
 		fmt.Println("Good evening!")
 	}
+}
 
+func fallthroughSwitch() {
 	switch time.Now().Day() {
 	case 5:
 		fmt.Println("Clean your house.")
@@ -37,4 +35,13 @@ func main() {
 	default:
 		fmt.Println("No information available for that day.")
 	}
+}
+
+func main() {
+	if test := true; test {
+		fmt.Println("Hello If")
+	}
+
+	variableSwitch()
+	fallthroughSwitch()
 }

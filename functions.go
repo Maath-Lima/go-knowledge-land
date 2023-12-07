@@ -24,6 +24,14 @@ func update(age *int, name *string) {
 	return
 }
 
+type First func(int) int
+
+func partialSum(x int) First {
+	return func(y int) int {
+		return sum(x, y)
+	}
+}
+
 func main() {
 	fmt.Println(sum(32, 27))
 
@@ -34,9 +42,27 @@ func main() {
 	age := 25
 	name := "Jhon"
 
-	fmt.Println("Before update:", name, age)
+	// Sample using closures functions
+
+	buildText := func(description, name string, age int) {
+		fmt.Println(description, name, age)
+	}
+
+	buildText("Before update:", name, age)
 
 	update(&age, &name)
 
-	fmt.Println("After update:", name, age)
+	buildText("After update:", name, age)
+
+	// Sample anonymous function
+
+	fmt.Printf("100 (°F) = %.2f (°C)\n",
+		func(f float64) float64 {
+			return (f - 32.0) * (5.0 / 9.0)
+		}(100),
+	)
+
+	// HOF
+	partial := partialSum(3)
+	fmt.Println(partial(7))
 }
